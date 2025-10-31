@@ -756,6 +756,23 @@ body {
         font-size: 1.4rem;
     }
 
+    /* Footer Mobile - Center Everything */
+    .footer-content {
+        text-align: center;
+    }
+
+    .footer-logo {
+        justify-content: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-section ul {
+        padding: 0;
+    }
+
     /* Hero Section */
     .hero {
         padding: 80px 0 40px;
