@@ -83,7 +83,8 @@ body {
     transition: color 0.3s;
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover,
+.nav-menu a.active {
     color: var(--primary-color);
 }
 
@@ -106,6 +107,22 @@ body {
     padding: 140px 0 80px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('images/page1.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: 0;
 }
 
 .hero-content {
@@ -113,6 +130,8 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-title {
@@ -126,6 +145,7 @@ body {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     opacity: 0.95;
+    line-height: 1.6;
 }
 
 .hero-buttons {
@@ -166,19 +186,18 @@ body {
     background: rgba(255, 255, 255, 0.3);
 }
 
-.hero-image-placeholder {
-    background: rgba(255, 255, 255, 0.1);
+.hero-image {
     border-radius: 20px;
+    overflow: hidden;
     height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
 }
 
-.hero-image-placeholder i {
-    font-size: 8rem;
-    opacity: 0.3;
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Section Styles */
@@ -202,6 +221,7 @@ body {
 .section-header p {
     font-size: 1.1rem;
     color: var(--text-light);
+    line-height: 1.7;
 }
 
 /* Durasi Section */
@@ -315,24 +335,21 @@ body {
 
 .dampak-content {
     display: grid;
-    /* buat kolom gambar sedikit lebih lebar */
     grid-template-columns: 0.6fr 1fr;
     gap: 60px;
-    /* stretch children so image can match text height */
     align-items: stretch;
 }
 
 .dampak-image {
     border-radius: 10px;
     overflow: hidden;
-    /* Regangkan anak-anak elemen agar gambar dapat menyesuaikan tinggi teks */
     height: 100%;
 }
 
 .dampak-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Isi area sambil mempertahankan rasio aspek */
+    object-fit: cover;
     display: block;
 }
 
@@ -340,9 +357,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* Isi sel grid dengan daftar sehingga bagian bawahnya sejajar dengan gambar */
     height: 100%;
-    /* distribusikan item sehingga yang terakhir berada dekat bagian bawah */
     justify-content: space-between;
 }
 
@@ -360,8 +375,6 @@ body {
     box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
 }
 
-
-
 .dampak-text h3 {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
@@ -369,7 +382,6 @@ body {
 }
 
 .dampak-text p {
-    /* Gunakan teks yang lebih gelap seperti pada bagian lain (bukan biru) */
     color: var(--text-dark);
     line-height: 1.6;
 }
@@ -636,10 +648,14 @@ body {
     padding-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     opacity: 0.7;
+    font-size: 0.9rem;
 }
 
-/* Responsive Design */
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablet & Medium Screens */
 @media (max-width: 968px) {
+    /* Navigation - Hamburger Menu */
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -651,6 +667,7 @@ body {
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         padding: 20px;
+        z-index: 999;
     }
 
     .nav-menu.active {
@@ -661,51 +678,289 @@ body {
         display: flex;
     }
 
+    /* Hero Section */
+    .hero {
+        padding: 100px 0 60px;
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
 
     .hero-title {
         font-size: 2.2rem;
     }
 
-    .dampak-content {
-        grid-template-columns: 1fr;
-    }
-
-    .calculator-container {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 640px) {
-    .hero-title {
-        font-size: 1.8rem;
-    }
-
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .hero-image {
+        height: 300px;
+    }
+
+    /* Section Headers */
+    .section {
+        padding: 60px 0;
     }
 
     .section-header h2 {
         font-size: 2rem;
     }
 
-    .durasi-grid,
-    .tips-grid {
+    .section-header p {
+        font-size: 1rem;
+    }
+
+    /* Dampak Section */
+    .dampak-content {
         grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .dampak-image {
+        height: 300px;
+    }
+
+    /* Calculator */
+    .calculator-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Contact */
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tips Grid - 2 columns on tablet */
+    .tips-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Mobile Screens */
+@media (max-width: 640px) {
+    /* Container */
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Logo */
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .logo i {
+        font-size: 1.4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 80px 0 40px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-image {
+        height: 250px;
     }
 
     .hero-buttons {
         flex-direction: column;
+        width: 100%;
     }
 
     .btn {
         width: 100%;
         text-align: center;
+        padding: 12px 24px;
+    }
+
+    /* Section */
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+        font-size: 1.75rem;
+    }
+
+    .section-header p {
+        font-size: 0.95rem;
+    }
+
+    /* Durasi Grid - 1 column on mobile */
+    .durasi-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .durasi-card {
+        padding: 30px 20px;
+    }
+
+    .durasi-icon {
+        font-size: 2.5rem;
+    }
+
+    .durasi-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .durasi-time {
+        font-size: 1.75rem;
+    }
+
+    /* Tips Grid - 1 column on mobile */
+    .tips-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .tip-card {
+        padding: 25px 20px;
+    }
+
+    .tip-icon {
+        font-size: 2rem;
+    }
+
+    .tip-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .tip-card p {
+        font-size: 0.95rem;
+    }
+
+    /* Dampak Section */
+    .dampak-image {
+        height: 250px;
+    }
+
+    .dampak-item {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dampak-text h3 {
+        font-size: 1.1rem;
+    }
+
+    .dampak-text p {
+        font-size: 0.95rem;
+    }
+
+    /* Calculator */
+    .calculator-card {
+        padding: 25px 20px;
+    }
+
+    .calculator-result {
+        padding: 25px 20px;
+    }
+
+    .result-info {
+        padding: 15px;
+    }
+
+    .result-placeholder i {
+        font-size: 3rem;
+    }
+
+    /* Contact Section */
+    .contact-icon {
+        font-size: 1.5rem;
+        min-width: 40px;
+    }
+
+    .contact-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .contact-item p {
+        font-size: 0.95rem;
+    }
+
+    .contact-form {
+        padding: 25px 20px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 40px 0 20px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-logo {
+        font-size: 1.3rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-section p {
+        font-size: 0.95rem;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 100%;
+    }
+
+    .footer-bottom {
+        font-size: 0.85rem;
+        padding-top: 20px;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 380px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .durasi-time {
+        font-size: 1.5rem;
+    }
+
+    .tip-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
 }
